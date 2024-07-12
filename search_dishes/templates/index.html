@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Dishes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            text-align: center;
+            margin-top: 1%;
+        }
+        input[type="text"] {
+            padding: 0.8%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        table {
+            margin: auto;
+            width: 70%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #d3d3d3;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Dishes</h1>
+    <form method="GET" action="{% url 'search' %}">
+        <input type="text" name="q" placeholder="Search for a dish">
+        <button type="submit">Search</button>
+    </form>
+    <div style="text-align: center; margin-top: 20px;">
+        {% if dishes %}
+            <p>{{ dishes|length }} dish{{ dishes|length|pluralize }} found</p>
+        {% else %}
+            <p>No dishes found</p>
+        {% endif %}
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Restaurant Name</th>
+                <th>Dish Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dish in dishes %}
+            <tr>
+                <td>{{ dish.restaurant.name }}</td>
+                <td>{{ dish.name }}</td>
+                <td>{{ dish.price }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No dishes found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
