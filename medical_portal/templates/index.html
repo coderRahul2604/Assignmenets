@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+{% endblock css %}
+
+{% block content %}
+<div class="message">
+  {% for message in messages %}
+    <div class="alert {{ message.tags }}">
+      <strong>Message:</strong> {{ message }}
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    </div>
+  {% endfor %}
+</div>
+<div class="main" id="main">
+  <div class="forms" id="forms">
+    <div class="signupform" id="signupform" style="display: none; padding: 5%;" >
+      <h2>Signup</h2>
+      <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+        {% csrf_token %}
+        {{ signup_form.as_p }}
+        <input type="submit" value="Signup" />
+      </form>
+      <p style="text-align: center;">I have an account.<span onclick="displaylogin()" id="loginbtn" style="color: blue; cursor: pointer;">Login</span></p>
+    </div>
+
+    <div class="loginform" id="loginform">
+      
+      <div id="doctorLogin">
+        <h2>User Login</h2>
+        <form action="{% url 'login' %}" method="post">
+          {% csrf_token %}
+          {{ login_form.as_p }}
+          <input type="submit" value="Login" />
+        </form>
+      </div>
+
+      <p style="text-align: center;">I don't have an account.<span onclick="displaysignup()" id="signupbtn" style="color: blue; cursor: pointer;">Signup</span></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  var loginform = document.getElementById('loginform');
+  var signupform = document.getElementById('signupform');
+  var messages = document.querySelectorAll('.message .alert');
+
+  messages.forEach(function (message) {
+    setTimeout(function () {
+      message.style.display = 'none';
+    }, 5000);
+  });
+
+  function displaylogin() {
+    signupform.style.display = 'none';
+    loginform.style.display = 'block';
+  }
+
+  function displaysignup() {
+    signupform.style.display = 'block';
+    loginform.style.display = 'none';
+  }
+
+  function validateForm() {
+    var password = document.getElementById('password').value;
+    var confirmPassword = document.getElementById('confirm_password').value;
+
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      return false;
+    }
+    return true;
+  }
+
+  function toggleForms() {
+    var patientLogin = document.getElementById('patientLogin');
+    var doctorLogin = document.getElementById('doctorLogin');
+    var togglebtn = document.getElementById('togglebtn');
+
+    if (patientLogin.classList.contains('hidden')) {
+      patientLogin.classList.remove('hidden');
+      doctorLogin.classList.add('hidden');
+      togglebtn.innerHTML = 'Switch to Doctor Login';
+    } else {
+      patientLogin.classList.add('hidden');
+      doctorLogin.classList.remove('hidden');
+      togglebtn.innerHTML = 'Switch to Patient Login';
+    }
+  }
+</script>
+{% endblock %}

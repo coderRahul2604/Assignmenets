@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar, .footer {
+    margin:auto;
+    width: 99%;
+    display: flex;
+    justify-content: center;
+    background-color: #c5adad;
+    color: white;
+    padding: 10px;
+  }
+
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    margin-right: 14%;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  .footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
