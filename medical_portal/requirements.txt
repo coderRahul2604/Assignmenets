@@ -1,2 +1,2 @@
-install django, pillow, pymysql
-create virtual environment.
+install django, pillow, pymysql, google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+setup virtual environment.
