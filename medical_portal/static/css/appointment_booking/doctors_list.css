@@ -1,0 +1,33 @@
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.doctorHeader h2{
+    width: 30%;
+    margin-left: 35%;
+}
+
+.profile_image {
+    margin-right: 20px;
+}
+.profile_image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.info {
+    width: 40%;
+    font-size: 18px;
+}
+.info a, .doctorHeader a{
+    text-decoration: none;
+    color: beige;
+    background-color: #64d864;
+    padding: 3%;
+}

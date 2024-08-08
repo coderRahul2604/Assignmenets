@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}List of Doctors{% endblock %}
+{% block css%}
+<link rel="stylesheet" href="{% static 'css/appointment_booking/doctors_list.css' %}">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock%}
+{% block content %}
+<div class="doctorHeader" style="display: flex;">
+    <h1>List of Doctors</h1>
+    <h2><a href="my_appointment/">My Appointment</a></h2>
+</div>
+    
+<ul>
+    <div class="message">
+        {% for message in messages %}
+        <div class="alert {{ message.tags }}">
+            <strong>Message: </strong> {{ message }}
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        </div>
+        {% endfor %}
+    </div>
+    {% for doctor in doctors %}
+    <li>
+        <div class="profile_image">
+            {% if doctor.profile_picture %}
+            <img src="{{ doctor.profile_picture.url }}" alt="{{ doctor.username }}">
+        {% else %}
+            <img src="{% static 'img/d.png' %}" alt="Default Profile Picture">
+        {% endif %}
+        </div>
+        <div class="info">
+            <p>{{ doctor.username }}</p>
+            <a href="{% url 'book_appointment' doctor.id %}">Book Appointment</a>
+        </div>
+        
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

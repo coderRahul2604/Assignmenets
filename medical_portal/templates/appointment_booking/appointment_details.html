@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="message">
+    {% for message in messages %}
+    <div class="alert {{ message.tags }}">
+        <strong>Message: </strong> {{ message }}
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    </div>
+    {% endfor %}
+</div>
+
+    <h1>Appointment Details</h1>
+    {% for appointment in appointments%}
+    <div class="main">
+        <p>Doctor: {{ appointment.doctor }}</p>
+        <p>Doctor: {{ appointment.speciality }}</p>
+        <p>Date: {{ appointment.date }}</p>
+        <p>Start Time: {{ appointment.start_time }}</p>
+        <p>End Time: {{ appointment.end_time }}</p>
+    </div>
+    {% endfor %}
+
+<script>
+    var messages = document.querySelectorAll('.message .alert')
+
+    messages.forEach(function (message) {
+        setTimeout(function () {
+            message.style.display = 'none'
+        }, 5000)
+    })
+</script>
+{% endblock %}
